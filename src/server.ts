@@ -11,10 +11,10 @@ import { protectedRouter, unprotectedRouter } from './routes';
 
 createConnection({
   type: 'mysql',
-  host: '47.101.40.88',
+  host: 'localhost',
   port: 3306,
   username: 'root',
-  password: 'Honor6plus-911',
+  password: 'root',
   database: 'koa',
   synchronize: true,
   entities: ['src/entity/*.ts'],
