@@ -23,7 +23,7 @@ export class UnauthorizedException extends BaseException {
   }
 }
 
-export class ForbiddenException extends BaseException {
+export class ForbiddentException extends BaseException {
   status = 403;
 
   constructor(msg?: string) {

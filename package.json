@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Hands-on tutorial for Koa 2",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon --watch src -e ts,tsx --exec ts-node src/server.ts"
   },
@@ -25,12 +25,13 @@
   },
   "dependencies": {
     "@koa/cors": "^3.0.0",
-    "@koa/router": "^8.0.8",
-    "argon2": "^0.26.2",
+    "@koa/router": "^9.4.0",
+    "argon2": "^0.27.0",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.3.0",
     "koa-jwt": "^4.0.0",
+    "koa-static": "^5.0.0",
     "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.25"

@@ -1,29 +1,70 @@
-# 一杯茶的时间，上手 Koa2 + MySQL 开发
+# 拼车业务模型分析
 
-> 本项目代码在持续完善中，如有任何建议，欢迎提交 Issue！
+1. 明确我们的目标用户是谁(人找车、车找人、货找车、车找货)
+   .乘客 -临时、固定时间
 
-https://tuture.co/2020/05/22/fac8401/
+   .司机 -载客司机
+   .临时、专业
 
-凭借精巧的“洋葱模型”和对 Promise 以及 async/await 异步编程的完全支持，Koa 框架自从诞生以来就吸引了无数 Node 爱好者。然而 Koa 本身只是一个简单的中间件框架，要想实现一个足够复杂的 Web 应用还需要很多周边生态支持。这篇教程不仅会带你梳理 Koa 的基础知识，还会充分地运用和讲解构建 Web 应用必须的组件（路由、数据库、鉴权等），最终实现一个较为完善的用户系统。
+   -载货司机
+   .临时、专业
 
-## 所用技术
+2. 主体流程
+   连接需求-供应方和需求方
 
-- Node.js：10.x 及以上
-- npm：6.x 及以上
-- Koa：2.x
-- MySQL：推荐稳定的 5.7 版本及以上
-- TypeORM：0.2.x
+3. 功能
+   1、发布用户需求（发布之后预览功能） -拼车类型、出发时间、时间补充、出发地、目的地、途径、车型、空位/人数、手机、更多
 
-## 开启项目
+   2、需求列表
+   ① 主要展示 展示形式（是否带车图片、还是纯文字）
+   ② 点击进入详细，会用司机服务的具体数据和评价，主要是优势展示(考虑不好的展示)
+   ③ 列表页可以根据出发日期进行排序
 
-克隆该项目：
+   3、热门路线 -根据需求列表数据计算
 
-```bash
-git clone https://github.com/tuture-dev/koa-quickstart.git
-```
+   4、线路查询 -出发地 到 目的地
 
-确保 MySQL 数据库实例已在运行。然后打开服务器：
+   5、轮播图（可选）
 
-```bash
-npm start
-```
+   6、分享发布的行程（到微信用户、微信群）
+
+4. 数据结构与细节
+   拼车列表: list:
+   -type:1 人找车、2 车找人、3 车找货、 4 货找车
+   -go-off 出发时间
+   -departure 出发地
+   -destination 目的地
+   -way 途径
+   -model 车型
+   -Vacancy / people 空位/人数
+   -phone 手机
+
+   carpool(表)
+   -type 1 人找车、2 车找人、3 车找货、 4 货找车
+   -go-off 出发时间
+   -Departure 出发地
+   -destination 目的地
+   -phone 手机
+   -publish 发布时间
+
+   人(表):
+   -id 用户 id
+   -username 用户名称
+   -avatar 用户头像
+   -people 人数
+
+   车(表):
+   -id 车辆 id
+   -way 途径
+   -model 车型
+   -Vacancy 空位
+
+   货(表):
+   -model 车型
+   -Vacancy 空位
+   -way 途径
+
+## How to use CLI?
+
+1. install `typeorm` globally: `npm i -g typeorm`
+2. run `typeorm -h` to show list of available commands
