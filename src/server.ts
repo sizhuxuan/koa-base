@@ -14,7 +14,7 @@ createConnection({
   host: 'localhost',
   port: 3306,
   username: 'root',
-  password: 'root',
+  password: '123456',
   database: 'koa',
   synchronize: true,
   entities: ['src/entity/*.ts'],
@@ -55,6 +55,6 @@ createConnection({
     app.use(protectedRouter.routes()).use(protectedRouter.allowedMethods());
 
     // 运行服务器
-    app.listen(3000);
+    app.listen(8000);
   })
   .catch((err: string) => console.log('TypeORM conncetion error:', err));

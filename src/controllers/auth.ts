@@ -12,7 +12,7 @@ export default class AuthController {
 
     const user = await userRepository
       .createQueryBuilder()
-      .where({ name: ctx.request.body.name })
+      .where({ name: ctx.request.body.username })
       .addSelect('User.password')
       .getOne();
 
@@ -42,12 +42,13 @@ export default class AuthController {
 
     // 保存到数据库
     const user = await userRepository.save(newUser);
+
     const { id, name, email } = user;
 
     ctx.status = 201;
     ctx.body = {
-      data: { id, name, email },
       meta: { msg: '注册成功', status: 201 },
+      data: { name, email, id },
     };
   }
 }
