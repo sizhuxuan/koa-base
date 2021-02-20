@@ -13,4 +13,16 @@ export class User {
 
   @Column()
   email: string;
+
+  @Column()
+  mobile: string;
+
+  @Column()
+  create_time: Date;
+
+  @Column()
+  update_time: Date;
+
+  @Column()
+  is_valid: number;
 }
