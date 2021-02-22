@@ -19,10 +19,10 @@ const protectedRouter = new Router();
 // users 相关路由
 protectedRouter.get('/user/getUsers', UserController.getUsers);
 protectedRouter.post('/user/addUser', UserController.addUser);
-protectedRouter.delete('/user/deleteUser:id', UserController.deleteUser);
+protectedRouter.delete('/user/deleteUser/:id', UserController.deleteUser);
 
 protectedRouter.get('/user/users/:id', UserController.showUserDetail);
 protectedRouter.get('/user/info', UserController.getUserInfo);
-protectedRouter.put('/user/users/:id', UserController.updateUser);
+protectedRouter.put('/user/updateUser', UserController.updateUser);
 
 export { protectedRouter, unprotectedRouter };

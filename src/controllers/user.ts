@@ -8,14 +8,21 @@ import { NotFoundException, ForbiddentException, UnauthorizedException } from '.
 
 export default class UserController {
   public static async getUsers(ctx: Context) {
+    const { query, pagenum, pagesize } = ctx.query;
     const userRepository = getManager().getRepository(User);
 
-    const users = await userRepository.find();
+    let [users, total] = await userRepository.findAndCount({
+      order: {
+        create_time: 'DESC',
+      },
+      take: pagesize,
+      // skip: 5,
+    });
 
     ctx.status = 200;
     ctx.body = {
-      data: users,
-      meta: { msg: '获取用户列表成功', code: 20000 },
+      data: { users, total },
+      meta: { message: '获取用户列表成功', code: 20000 },
     };
   }
 
@@ -82,32 +89,34 @@ export default class UserController {
   }
 
   public static async updateUser(ctx: Context) {
-    const userId = +ctx.params.id;
+    const { id, email, mobile } = ctx.request.body;
+    console.log('ctx:', id, email, mobile);
 
-    if (userId !== +ctx.state.user.id) {
-      throw new ForbiddentException();
-    }
+    // if (userId !== +ctx.state.user.id) {
+    //   throw new ForbiddentException();
+    // }
 
     const userRepository = getManager().getRepository(User);
-    await userRepository.update(+ctx.params.id, ctx.request.body);
-    const updatedUser = await userRepository.findOne(+ctx.params.id);
 
-    console.log('updatedUser:', updatedUser);
+    await userRepository.update(id, { email, mobile, update_time: new Date() });
+    const updatedUser = await userRepository.findOne(+ctx.request.body.id);
 
     if (updatedUser) {
       ctx.status = 200;
-      ctx.body = { data: updatedUser, meta: { msg: '更新成功', code: 200 } };
+      ctx.body = { data: updatedUser, meta: { message: '更新成功', code: 20000 } };
     } else {
       ctx.status = 404;
     }
   }
 
   public static async deleteUser(ctx: Context) {
-    const userId = +ctx.params.id;
+    console.log('ctx:', ctx.params);
 
-    if (userId !== +ctx.state.user.id) {
-      throw new ForbiddentException();
-    }
+    const userId = +ctx.params.id;
+    console.log(userId, +ctx.state.user.id);
+    // if (userId !== +ctx.state.user.id) {
+    //   throw new ForbiddentException();
+    // }
 
     const userRepository = getManager().getRepository(User);
     await userRepository.delete(+ctx.params.id);
