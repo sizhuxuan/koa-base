@@ -31,7 +31,6 @@ export default class AuthController {
   }
 
   public static async logout(ctx: Context) {
-    console.log('ctx:', ctx);
     const userRepository = getManager().getRepository(User);
 
     const Token = ctx.request.header['authorization'].split(' ')[1];
