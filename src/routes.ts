@@ -4,6 +4,7 @@ import AuthController from './controllers/auth';
 import UserController from './controllers/user';
 import CarpoolController from './controllers/carpool';
 import ArticleController from './controllers/article';
+import MenuController from './controllers/menu';
 
 const unprotectedRouter = new Router();
 
@@ -26,5 +27,6 @@ protectedRouter.get('/user/info', UserController.getUserInfo);
 
 // excel 相关路由
 protectedRouter.get('/article/list', ArticleController.getList);
+protectedRouter.get('/menu/getMenus', MenuController.getMenus);
 
 export { protectedRouter, unprotectedRouter };

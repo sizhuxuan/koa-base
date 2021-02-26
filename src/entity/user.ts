@@ -6,6 +6,9 @@ export class User {
   id: number;
 
   @Column()
+  role_id: number;
+
+  @Column()
   name: string;
 
   @Column({ select: false })
@@ -18,10 +21,19 @@ export class User {
   mobile: string;
 
   @Column()
+  department: string;
+
+  @Column()
+  position: string;
+
+  @Column()
   create_time: Date;
 
   @Column()
   update_time: Date;
+
+  @Column()
+  lastLogin_time: Date;
 
   @Column()
   is_valid: number;
