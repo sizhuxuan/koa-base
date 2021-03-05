@@ -55,6 +55,6 @@ createConnection({
     app.use(protectedRouter.routes()).use(protectedRouter.allowedMethods());
 
     // 运行服务器
-    app.listen(8000);
+    app.listen(9000);
   })
   .catch((err: string) => console.log('TypeORM conncetion error:', err));

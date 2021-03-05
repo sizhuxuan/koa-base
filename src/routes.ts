@@ -27,6 +27,6 @@ protectedRouter.get('/user/info', UserController.getUserInfo);
 
 // excel 相关路由
 protectedRouter.get('/article/list', ArticleController.getList);
-protectedRouter.get('/menu/getMenus', MenuController.getMenus);
+protectedRouter.get('/getMenus', MenuController.getMenus);
 
 export { protectedRouter, unprotectedRouter };

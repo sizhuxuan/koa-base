@@ -21,6 +21,15 @@ export class Menu {
   path: string;
 
   @Column()
+  component: string;
+
+  @Column()
+  title: string;
+
+  @Column()
+  icon: string;
+
+  @Column()
   level: number;
 
   @Column()

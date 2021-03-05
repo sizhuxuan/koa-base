@@ -8,8 +8,8 @@ export default class MenuController {
     const menuRepository = getRepository(Menu);
     const menus: Array<object> = await menuRepository.find();
 
-    const firstLevel: any = [];
-    const secondLevel: any = [];
+    const firstLevel: Array<{ children: Array<object>; id: number }> = [];
+    const secondLevel: Array<{ parent_id: number }> = [];
 
     menus.forEach((item: any) => {
       if (item.level == 1) {
@@ -28,23 +28,6 @@ export default class MenuController {
       }
       firstLevel[i].children = ff;
     }
-
-    console.log('firstLevel:', firstLevel);
-
-    // const filterAsyncRoutes = (menus: []) {
-    //   const res:[] = [];
-
-    //   menus.forEach((menu) => {
-    //     const tmp = { ...route };
-    //     if (hasPermission(roles, tmp)) {
-    //       if (tmp.children) {
-    //         tmp.children = filterAsyncRoutes(tmp.children, roles);
-    //       }
-    //       res.push(tmp);
-    //     }
-    //   });
-    //   return res;
-    // }
 
     ctx.status = 200;
     ctx.body = {

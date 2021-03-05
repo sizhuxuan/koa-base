@@ -64,7 +64,7 @@ export default class UserController {
           ...user,
           avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
           introduction: 'I am a super administrator',
-          roles: ['editor'],
+          roles: ['admin'],
         },
         meta: { message: '获取用户成功', code: 20000 },
       };
