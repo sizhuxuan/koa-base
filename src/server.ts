@@ -1,6 +1,7 @@
 import Koa from 'koa';
 import cors from '@koa/cors';
 import bodyParser from 'koa-bodyparser';
+import koaBody from 'koa-body';
 import { createConnection } from 'typeorm';
 import 'reflect-metadata';
 
@@ -30,6 +31,11 @@ createConnection({
     app.use(logger());
     app.use(cors());
     app.use(bodyParser());
+    app.use(
+      koaBody({
+        multipart: true,
+      }),
+    );
 
     // 添加错误处理中间件来捕获在 Controller 中抛出的错误
     app.use(async (ctx, next) => {

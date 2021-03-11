@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../constants';
 import { Context } from 'koa';
 import * as argon2 from 'argon2';
-import { getRepository } from 'typeorm';
+import { Any, getRepository } from 'typeorm';
 import { Article } from '../entity/article';
 import { UnauthorizedException } from '../exceptions';
 
@@ -26,7 +26,25 @@ export default class ArticleController {
     };
   }
 
-  public static async logout(ctx: Context) {}
+  public static async uploadImage(ctx: Context) {
+    // const { name, path: filePath, size, type }: any = ctx.request.files.file;
 
-  public static async register(ctx: Context) {}
+    ctx.status = 200;
+    ctx.body = {
+      data: { name, filePath, size, type },
+      meta: { message: '图片上传成功', code: 20000 },
+    };
+  }
+
+  public static async publishArticle(ctx: Context) {
+    console.log('publishArticle:', ctx);
+
+    // const articleRepository = getRepository(Article);
+
+    ctx.status = 200;
+    ctx.body = {
+      data: {},
+      meta: { message: '文章发布成功', code: 20000 },
+    };
+  }
 }

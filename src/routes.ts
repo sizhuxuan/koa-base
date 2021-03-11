@@ -18,15 +18,19 @@ unprotectedRouter.post('/home/addcarpool', CarpoolController.addCarpool);
 
 const protectedRouter = new Router();
 
-// users 相关路由
+// users
 protectedRouter.get('/user/getUsers', UserController.getUsers);
 protectedRouter.post('/user/addUser', UserController.addUser);
 protectedRouter.delete('/user/deleteUser/:id', UserController.deleteUser);
 protectedRouter.put('/user/updateUser', UserController.updateUser);
 protectedRouter.get('/user/info', UserController.getUserInfo);
 
-// excel 相关路由
-protectedRouter.get('/article/list', ArticleController.getList);
+// menus
 protectedRouter.get('/getMenus', MenuController.getMenus);
+
+// community
+protectedRouter.get('/article/list', ArticleController.getList);
+unprotectedRouter.post('/article/uploadImage', ArticleController.uploadImage);
+protectedRouter.post('/article/publishArticle', ArticleController.publishArticle);
 
 export { protectedRouter, unprotectedRouter };
