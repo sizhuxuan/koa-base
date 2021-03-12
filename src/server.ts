@@ -1,10 +1,9 @@
 import Koa from 'koa';
 import cors from '@koa/cors';
-import bodyParser from 'koa-bodyparser';
-import koaBody from 'koa-body';
 import { createConnection } from 'typeorm';
 import 'reflect-metadata';
-
+import koaBody from 'koa-body';
+import path from 'path';
 import { logger } from './logger';
 import { JWT_SECRET } from './constants';
 import jwt from 'koa-jwt';
@@ -30,10 +29,14 @@ createConnection({
     // 注册中间件
     app.use(logger());
     app.use(cors());
-    app.use(bodyParser());
     app.use(
       koaBody({
-        multipart: true,
+        multipart: true, // 支持文件上传
+        formidable: {
+          uploadDir: path.join(__dirname, `/uploads/`), // 设置文件上传目录
+          maxFieldsSize: 2 * 1024 * 1024, // 最大文件为2兆
+          keepExtensions: true, //允许保留后缀名
+        },
       }),
     );
 
