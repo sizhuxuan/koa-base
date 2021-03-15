@@ -66,7 +66,8 @@ export default class UserController {
           introduction: 'I am a super administrator',
           roles: ['admin'],
         },
-        meta: { message: '获取用户成功', code: 20000 },
+        msg: '获取用户成功',
+        code: 1,
       };
     } else {
       throw new NotFoundException();

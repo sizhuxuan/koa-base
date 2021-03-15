@@ -8,6 +8,7 @@ import { UnauthorizedException } from '../exceptions';
 
 export default class AuthController {
   public static async login(ctx: Context) {
+    console.log('ctx:', ctx.request.body);
     const userRepository = getManager().getRepository(User);
 
     const user = await userRepository
@@ -22,7 +23,8 @@ export default class AuthController {
       const { id, name, email } = user;
       ctx.status = 200;
       ctx.body = {
-        meta: { message: '登录成功', code: 20000 },
+        code: 1,
+        msg: '登录成功',
         data: { id, name, email, token: 'Bearer ' + jwt.sign({ id: user.id }, JWT_SECRET) },
       };
     } else {
@@ -42,7 +44,8 @@ export default class AuthController {
     if (user) {
       ctx.status = 200;
       ctx.body = {
-        meta: { message: '退出成功', code: 20000 },
+        msg: '退出成功',
+        code: 1,
         data: 'success',
       };
     } else {
